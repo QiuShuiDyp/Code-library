@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .indea{
+      font-size: 20px;
+      color: blueviolet;
+    }
+  </style>
+</head>
+<body>
+  <div id="did">
+    <ul id="uid">
+      <li style="background-color: skyblue;">中国</li>
+      <li class="indea">印度</li>
+      <li>美国</li>
+    </ul>
+    <input type="text" id="iid">123</input><br/>
+  </div>
+  <button onclick="domOper()">触发DOM操作</button>
+  <script>
+    function domOper(){
+      console.log(document.querySelector('.indea').hasAttribute('font-size'))
+    }
+  </script>
+</body>
+</html>

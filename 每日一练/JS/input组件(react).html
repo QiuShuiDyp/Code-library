@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='test'></div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script type="text/babel">
+    class MyInput extends React.Component{
+      render(){
+        let {value, defValue} = this.props
+        return (
+          <input type="text" defaultValue={this.state.defValue} value={value} onChange={this.changeVal}/>
+        )
+      }
+      state={
+        value:'',
+        defValue:'这是默认值'
+      }
+      // // 动态变化
+      changeVal = (event)=>{
+        this.setState({value:event.target.value})
+      }
+    }
+    ReactDOM.render(<MyInput/>,document.getElementById('test'))
+  </script>
+</body>
+</html>

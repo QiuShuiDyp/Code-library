@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .border::after{
+            clear: both;
+            height: 0;
+            content: ' ';
+            display: block;
+            visibility: hidden;
+        }
+        .rd1{
+            height: 100px;
+            width: 100px;
+            background-color: aquamarine;
+            border-radius: 25px;
+            margin: 10px;
+            float: left;
+        }
+        .rd2{
+            height: 100px;
+            width: 100px;
+            background-image: url('../static/风景.jpg');
+            border-radius: 25px;
+            margin: 10px;
+            float: left;
+        }
+        .rd3{
+            height: 100px;
+            width: 100px;
+            background-color: brown;
+            border-radius: 15px 30px 15px 30px;
+            margin: 10px;
+            float: left;
+        }
+        .rd4{
+            height: 100px;
+            width: 100px;
+            background-color: brown;
+            border-radius: 50px;
+            margin: 10px;
+            float: left;
+        }
+        .rd5{
+            height: 100px;
+            width: 100px;
+            background-color: brown;
+            border-radius: 50px/25px; 
+            margin: 10px;
+            float: left;
+        }
+        .d3{
+            height: 50px;
+            width: 50px;
+            border-radius: 25px;
+            background-color: chartreuse;
+            box-shadow: 0px 5px 2px 0px gray;
+        }
+        .border-shadow{
+            width: 100px;
+            height: 100px;
+            margin: 30px;
+            box-shadow: 0 0 0 10px green;
+            background-color: black;
+        }
+        .bg1{
+            background: url('../static/风景.jpg') no-repeat 400px 250px, url('../static/美女.jpeg') no-repeat  100% 100%;
+            height: 500px;
+            width: 800px;
+            padding: 20px;
+            margin: 20px;
+        }
+        .bg2{
+            /* border: 30px solid red; */
+            background: url('../static/风景.jpg') no-repeat 100% 100%;
+            background-clip: padding-box;
+            background-origin: border-box;
+            height: 500px;
+            width: 800px;
+            padding: 20px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 边框 -->
+    <div class="border">
+        <div class="rd1"></div>
+        <div class="rd2"></div>
+        <p class="rd3"></p>
+        <div class="rd4"></div>
+        <div class="rd5"></div>
+    </div>
+    <!-- 阴影 -->
+    <div class="shadow">
+        <div class="d3"></div>
+        <div class="border-shadow"></div>
+        <div class="special-shadow"></div>
+    </div>
+    <!-- 背景 -->
+    <div class="bkground">
+        <div class="bg1"></div>
+        <div class="bg2"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title>DEMO</title>
+  </head>
+  <body>
+    <div id="container"> 
+      <h1 id="title">我是标题</h1>
+      <button>
+        点击
+      </button>
+    </div>   
+    <script>
+      document.getElementById('title').addEventListener('click',(e)=>{
+        console.log('click')
+        e.stopPropagation()
+      },true)
+      document.getElementById('container').addEventListener('click',(e)=>{
+        console.log(e)
+      },true)
+    </script>
+  </body>
+</html>

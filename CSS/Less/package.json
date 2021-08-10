@@ -1,0 +1,10 @@
+{
+  "name": "Less-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "QiuShui",
+  "license": "MIT",
+  "dependencies": {
+    "less": "^4.1.1"
+  }
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>脱离文档流，但是不脱离文本流</title>
+    <style>
+        .item1{
+            float: left;
+            background-color: red;
+            height: 30px;  /*float浮动的元素*/
+        }
+        .item2{
+            float: left;
+            background-color: blue;
+        }
+        .item3{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span class="item1">水生呀</span>
+        <span class="item2">水生</span>
+        <!-- 浮动脱离文档流，但是不脱离文本流 -->
+        <div class="item3">这是个很长很长的句子这是个很长很长的句子这是个很长很长的句子这是个很长很长的句子这是个很长很长的句子这是个很长很长的句子这是个很长很长的句子这是个很长很长的句子</div>
+    </div>
+</body>
+</html>

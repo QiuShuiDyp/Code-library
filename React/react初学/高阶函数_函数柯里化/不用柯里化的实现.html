@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高阶函数_函数柯里化</title>
+  <style>
+    .bgcolor {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="test">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    class Demo extends React.Component{
+      state = {
+        username:'',
+        password:''
+      }
+      handleSubmit = (event)=>{
+        event.preventDefault()
+        const {username,password} = this.state
+        alert(`你输入的用户名是${username}，你输入的密码是${password}`)
+      }
+     
+      saveFormData = (dataType,event)=>{
+        this.setState({[dataType]:event.target.value})
+      }
+      resetForm = ()=>{
+        this.setState({
+          username:'',
+          password:''
+        })
+      }
+      render(){
+        return (
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              姓名：<input onChange={event=>this.saveFormData('username',event)} type="text" name="username"/>&nbsp;
+              密码：<input onChange={event=>this.saveFormData('password',event)} type="password" name="password"/>&nbsp;
+              <button>登录</button>
+            </form>
+            <button onClick={this.resetForm}>重置</button>
+          </div>
+          
+        )
+      }
+    }
+    ReactDOM.render(<Demo/>, document.getElementById('test'))
+  </script>
+</body>
+</html>

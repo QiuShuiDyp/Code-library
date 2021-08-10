@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生命周期</title>
+  <style>
+    .bgcolor {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="test">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    class Life extends React.Component{
+      state = {
+        opacity:1
+      }
+      // 初始化渲染，状态更新之后调用
+      render(){
+        return (
+          <div>
+            <h2 style = {{opacity:this.state.opacity}}>React学不会怎么办？</h2>
+            <button onClick={this.death}>不学了</button>
+          </div>
+        )
+      }
+      //组件实例挂载完成后的调用
+      componentDidMount() {
+        this.timer = setInterval(() => {
+          let {opacity} = this.state
+          opacity -= 0.1
+          if(opacity <= 0) opacity = 1
+          this.setState({opacity})
+        }, 200);
+      }
+      //组件将要卸载
+      componentWillUnmount(){
+        // 清楚定时器
+        clearInterval(this.timer)
+      }
+
+      death = ()=>{
+        ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+      }
+
+    }
+ 
+    ReactDOM.render(<Life/>, document.getElementById('test'))
+  </script>
+</body>
+</html>

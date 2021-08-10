@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>state属性</title>
+  <style>
+    .bgcolor {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="like_button_container">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    class Weather extends React.Component {
+      state = {
+        wind:'微风',
+        isHot:false
+      }
+      render(createElement, context) {
+        const {isHot, wind} = this.state
+        return (
+          <h1 onClick={this.changeSpan}>今天的天气很{isHot?'炎热':'凉爽'}</h1> 
+        )
+      }
+      // 改变this的指向有很多种方式，1.箭头函数 2.bind/call/apply 箭头函数中的this指向的是声明该函数时所包裹的外层函数作用域
+      changeSpan = ()=>{
+        const isHot = this.state.isHot
+        this.setState({isHot: !isHot})
+      }
+    }
+ 
+    ReactDOM.render(<Weather/>, document.getElementById('like_button_container'))
+  </script>
+</body>
+</html>

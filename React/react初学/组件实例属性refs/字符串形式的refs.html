@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>字符串形式的refs</title>
+  <style>
+    .bgcolor {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="test">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    class Demo extends React.Component{
+      render(){
+        return (
+          <div>
+            <input ref="input1" type="text" placeholder="点击按钮提示数据"/>&nbsp;
+            <button onClick={this.showData}>点我提示左侧的数据</button> &nbsp;
+            <input onBlur={this.showData2} ref="input2" type="text"/>
+          </div>
+        )
+      }
+      showData = ()=>{
+        console.log(this.refs.input1.value)
+      }
+      showData2 = ()=>{
+        console.log(this.refs.input2.value)
+      }
+    }
+    ReactDOM.render(<Demo/>, document.getElementById('test'))
+  </script>
+</body>
+</html>

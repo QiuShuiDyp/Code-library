@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>展开运算符...</title>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="like_button_container">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/javascript">
+    let arr1 = [1,2,3,4,5]
+    let arr2 = [6,7,8,9,10]
+    // 1.数组拼接
+    let newArr = [...arr1,...arr2]
+    console.log(newArr)
+    // 2.函数入参
+    function sum(...params){
+      return params.reduce((preValue,currentValue)=>{
+        return preValue + currentValue
+      })
+    }
+    console.log(sum(1,2,3,4,5))
+    let obj = {
+      name:'Tom',
+      age:'12'
+    }
+    let obj2 = {
+      sex:'man'
+    }
+    // 深拷贝
+    let newObj = {...obj}
+    console.log(newObj)
+    //4.合并对象,同时也支持修改对象属性值
+    let newObj2 = {...obj, ...obj2, name:'Tony', address:'BeiJing'}
+    console.log(newObj2)
+  </script>
+</body>
+</html>

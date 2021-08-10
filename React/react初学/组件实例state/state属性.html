@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>state属性</title>
+  <style>
+    .bgcolor {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="like_button_container">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    class Weather extends React.Component {
+      // 构建实例时，构造器只会调用一次
+      constructor(props){
+        super(props)
+        this.state = {
+          isHot:true,
+          wind:'微风'
+        }
+        // 给组件实例增加一个changeSpan属性，这个属性函数中的this指向为组件实例，方便实现onClick的调用
+        this.changeSpan = this.changeSpan.bind(this)
+      }
+      // 每次改变状态,就会触发render的调用
+      render(createElement, context) {
+        console.log('11 ')
+        return (
+          //注意：下面的并非正确的绑定方式，后续触发onClick事件时，changeSpan方法中的this并非组件实例，所以无法正常访问state,严格模式下为undefined
+          <h1 onClick={this.changeSpan}>今天的天气很{this.state.isHot?'炎热':'凉爽'}</h1> 
+        )
+      }
+      changeSpan(){
+        //状态(state)不可直接更改，下面是错误的写法
+        //this.state.isHot = !this.state.isHot
+        //状态必须通过setState的API进行修改，且setState做的操作是同名合并，而非替换原state
+        this.setState({isHot:!this.state.isHot})
+        // this.setState({wind:'lala'})
+      }
+    }
+ 
+    ReactDOM.render(<Weather/>, document.getElementById('like_button_container'))
+  </script>
+</body>
+</html>

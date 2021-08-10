@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSX语法</title>
+  <style>
+    .bgcolor {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="like_button_container">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    const myId = ['Angular','React','Vue']
+    //1.使用JSX创建虚拟DOM
+    const VDOM = (
+      <div>
+        <h1>前端JS框架列表</h1>
+        <ul>
+          <li>React</li>
+          <li>Vue</li>
+          <li>Angular</li>
+        </ul>
+      </div>
+    )
+    // 2.使用ReactDOM的render方法，将虚拟DOM和真实的DOM节点做结合
+    ReactDOM.render(VDOM, document.getElementById('like_button_container'))
+  </script>
+</body>
+</html>

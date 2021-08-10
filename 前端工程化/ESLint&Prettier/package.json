@@ -1,0 +1,8 @@
+{
+  "name": "eslint-prettier-test",
+  "version": "1.0.0",
+  "description": "eslint和prettier的测试验证",
+  "main": "index.js",
+  "author": "QiuShui",
+  "license": "MIT"
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>createRef</title>
+  <style>
+    .bgcolor {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="test">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    class Demo extends React.Component{
+      // React.createRef()调用后返回的容器，该容器可以存储被ref所标识的节点，但是只能存一个ref值
+      myRef1 = React.createRef()
+      myRef2 = React.createRef()
+      render(){
+        return (
+          <div>
+            <input ref={this.myRef1} type="text" placeholder="点击按钮提示数据"/>&nbsp;
+            <button onClick={this.showData}>点我提示左侧的数据</button> &nbsp;
+            <input ref={this.myRef2} onBlur={this.showData2} ref="input2" type="text"/>
+          </div>
+        )
+      }
+      showData = ()=>{
+        console.log(this.myRef.current)
+        // console.log(this.refs.input1.value)
+      }
+      showData2 = ()=>{
+        console.log()
+      }
+    }
+    ReactDOM.render(<Demo/>, document.getElementById('test'))
+  </script>
+</body>
+</html>

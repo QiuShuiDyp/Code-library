@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSX语法</title>
+  <style>
+    .bgcolor {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="test1"></div>
+  <div id="test2"></div>
+  <div id="test3"></div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!-- 引入prop-types用来给props做限制 -->
+  <script src="../../js/prop-types.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    class Person extends React.Component{
+      state = {
+        sex:'男'
+      }
+      render(){
+        const {name,age,speak} = this.props
+        console.log(this.props)
+        speak()
+        return (
+          <ul>
+            <li>name:{name}</li>
+            <li>age:{age}</li>
+            <li>sex:{this.state.sex}</li>
+          </ul>
+        )
+      }
+
+    }
+    // 1.传递props属性的方式1：单个传递
+    ReactDOM.render(<Person name="Tom" age='14' speak={speak}/>, document.getElementById('test1'))
+    // 2.传递props属性的方式2：批量传递 注意！！！ {...p}中{}是react中用来包裹表达式的，...p这种使用方式在其他情况会报错，但是允许在react批量处理标签中的属性传值的时候使用(react+babel)
+    let p1 = { name:12, age:12 }
+    let p2 = { name:'张三'}
+    // 给props添加限制
+    Person.propTypes = {
+      name: PropTypes.string.isRequired, //限制name必传，且为字符串
+      age: PropTypes.number, 
+      speak:PropTypes.func //限制speak为函数
+    }
+    // 指定默认的标签属性值
+    Person.defaultProps = {
+      age:14 //设置age的默认值为14
+    }
+
+    
+    ReactDOM.render(<Person {...p1}/>, document.getElementById('test2'))
+    ReactDOM.render(<Person {...p2}/>, document.getElementById('test3'))
+    function speak(){
+      console.log('我说话了')
+    }
+  </script>
+</body>
+</html>

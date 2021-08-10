@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>非受控组件</title>
+  <style>
+    .bgcolor {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="test">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    class Demo extends React.Component{
+      handleSubmit = (event)=>{
+        // 阻止原生的跳转动作
+        evnet.preventDefault()
+        const {username, password} = this
+        alert(`你输入的用户名是${username.value}，你输入的密码是${password.value}`)
+      }
+      render(){
+        return (
+          <form action="http://www.atguigu.com" onSubmit={this.handleSubmit}>
+            姓名：<input type="text" name="username" ref={c=>this.username = c}/>&nbsp;
+            密码：<input type="password" name="password" ref={c=>this.password = c}/>&nbsp;
+            <button>登录</button>
+          </form>
+        )
+      }
+    }
+    ReactDOM.render(<Demo/>, document.getElementById('test'))
+  </script>
+</body>
+</html>

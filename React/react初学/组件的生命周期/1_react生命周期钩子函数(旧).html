@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生命周期</title>
+  <style>
+    .bgcolor {
+      background: yellow;
+    }
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="test"></div>
+  <div id="test1"></div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    class Count extends React.Component{
+      // 构造器
+      constructor(props){
+        console.log('Count-constructor')
+        super(props)
+        this.state = { count:0}
+      }
+      // 组件将要挂载，beforeMount
+      componentWillMount(){
+        console.log('Count-componentWillMount')
+      }
+      // 控制组件更新(setState触发)的阀门，必须有返回值，默认返回true
+      shouldComponentUpdate(){
+        console.log('Count-shouldComponentUpdate')
+        return false
+      }
+      // beforeUpdate
+      componentWillUpdate(){
+        console.log('Count-componentWillUpdate')
+      }
+      // update
+      componentDidUpdate(){
+        console.log('Count-componentDidUpdate')
+      }
+      render(){
+        console.log('Count-render')
+        return (
+          <div>
+            <h2>sum:{this.state.count}</h2>
+            <button onClick={this.addOne}>点我+1</button>
+            <button onClick={this.death}>卸载组件</button>
+            <button onClick={this.force}>不更改任何状态数据，强制更新一下</button>
+          </div>
+        )
+      }
+      // 组件挂载完毕的钩子 mounted
+      componentDidMount(){
+        console.log('Count-componentDidMount')
+      }
+      componentWillUnmount(){
+        console.log('Count-componentWillUnmount')
+      }
+      death = ()=>{
+        console.log('卸载组件')
+        ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+      }
+      addOne = ()=>{
+        this.setState({count:this.state.count+1})
+      }
+      force = ()=>{
+        // 触发强制更新，哪怕不触发状态更新也强制更新，不考虑阀门钩子函数的影响
+        this.forceUpdate()
+      }
+    }
+    class A extends React.Component {
+      state = { carName:'奔驰'}
+      render(){
+        return (
+          <div>A组件&nbsp;
+          <button onClick={this.changeCar}>换车</button>
+          <B carName = {this.state.carName}/> 
+          </div>
+        )
+      }
+      componentWillReceiveProps(){
+        console.log('A-componentWillReceiveProps')
+      }
+      changeCar = ()=>{
+        this.setState({carName:'奥拓'})
+      }
+    }
+    class B extends React.Component {
+      render(){
+        return (
+          <div>B组件，接收到的车是:{this.props.carName}</div>
+        )
+      }
+      //组件接受新的props时调用，首次初始化不会触发
+      componentWillReceiveProps(){
+        console.log('B-componentWillReceiveProps')
+      }
+      shouldComponentUpdate(){
+        console.log('B-shouldComponentUpdate')
+        return true
+      }
+      componentWillUpdate(){
+        console.log('B-componentWillUpdate')
+      }
+    }
+    // ReactDOM.render(<Count/>, document.getElementById('test'))
+    ReactDOM.render(<A/>, document.getElementById('test1'))
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生命周期(新)</title>
+  <style>
+    .list {
+      background: skyblue;
+      width: 200px;
+      height: 150px;
+      overflow: auto;
+    }
+    .news {
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="test"></div>
+  <div id="test1"></div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    class News extends React.Component{
+      state = {
+        newArr:[]
+      }
+      getSnapshotBeforeUpdate(){
+        // 将新增新闻之前的内容区高度记录快照
+        return this.refs.list.scrollHeight
+      }
+      componentDidMount(){
+        this.timer = setInterval(()=>{
+          let {newArr} = this.state
+          let item = '新闻'+(newArr.length+1)
+          this.setState({newArr:[item,...newArr]})
+        },500)
+      }
+      // 更新完成时调整scrollTop的值
+      componentDidUpdate(preProps, preState,snapShotValue){
+        this.refs.list.scrollTop += this.refs.list.scrollHeight - snapShotValue
+      }
+      render(){
+        return (
+          <div className="list" ref="list">
+            {
+              this.state.newArr.map((item,index)=>{
+                return <div key={index}>{item}</div>
+              })
+            }
+          </div>
+        )
+      }
+     
+      componentWillUnmount(){
+        clearInterval(this.timer)
+      }
+      
+    }
+    
+    // ReactDOM.render(<Count/>, document.getElementById('test'))
+    ReactDOM.render(<News/>, document.getElementById('test1'))
+  </script>
+</body>
+</html>

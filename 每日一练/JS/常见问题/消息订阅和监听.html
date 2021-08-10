@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript实现观察者模式</title>
+  <style type="text/css">
+      .app .main {
+          width: 60%;
+          margin: 10px auto;
+      }
+
+      .app .main input[type='text'] {
+          width: 75%;
+      }
+  </style>
+</head>
+<body>
+  <div class="app">
+      <div class="main">
+          <label>消息内容：<input id="msg" name="msg" type="text"><button id="send" type="button">发送</button></label>
+          <div id="show-msg">
+          
+          </div>
+      </div>
+  </div>
+  
+  <script>
+      /**
+       * 功能：实现JavaScript的观察者功能
+       * @param handles 保存订阅对象
+       * */
+      class Observer {
+          constructor() {
+              this.handles = {};
+          }
+
+          /**
+           * 功能：订阅功能
+           * @param type string 订阅名称
+           * @param handle function 回调函数
+           * */
+          on(type, handle) {
+              if (Object.prototype.toString.call(type) !== '[object String]') {
+                  throw new Error("订阅名称为字符串类型");
+              }
+
+              if (Object.prototype.toString.call(handle) !== '[object Function]') {
+                  throw new Error("回调方法为函数");
+              }
+              if (this.handles.hasOwnProperty(type)) {
+                  this.handles[type].push(handle);
+              } else {
+                  this.handles[type] = [handle];
+              }
+          }
+
+          /**
+           * 功能：发布消息功能
+           * @param type string 订阅名称
+           * @param arr array 消息数组
+           * */
+          emit(type, ...arr) {
+              if (Object.prototype.toString.call(type) !== '[object String]') {
+                  throw new Error("订阅名称为字符串类型");
+              }
+              if (this.handles.hasOwnProperty(type)) {
+                  this.handles[type].forEach((item, key, value) => {
+                      // item.apply(null, arr);
+                      item(arr);
+                  });
+              } else {
+                  throw new Error("订阅 "+ type+ "不存在");
+              }
+          }
+
+          /**
+           * 功能：取消订阅
+           * @param type string 订阅名称
+           * */
+          off(type) {
+              if (Object.prototype.toString.call(type) !== '[object String]') {
+                  throw new Error("订阅名称为字符串类型");
+              }
+
+              if (!this.handles.hasOwnProperty(type)) {
+                  throw new Error("订阅 "+ type+ "不存在");
+              }
+              var _handles = {};
+              for (var key in this.handles) {
+                  if (key === type) {
+                      continue;
+                  }
+                  _handles[type] = this.handles[type];
+              }
+
+              this.handles = _handles;
+          }
+      }
+
+      window.onload = function () {
+          var obs = new Observer();
+          obs.on('test', function (msg) {
+              console.log(msg);
+              var showMsg = document.getElementById("show-msg");
+              var old_msg = showMsg.innerHTML;
+              showMsg.innerHTML = old_msg + msg + "<br />";
+          });
+
+          obs.on('test', function (msg1, msg2) {
+              console.log(msg1, msg2);
+          });
+
+          document.getElementById('send').addEventListener('click', function () {
+              var msg = document.getElementById('msg').value;
+              if (!msg) {
+                  return;
+              }
+              obs.emit('test', msg);
+          });
+      };
+  </script>
+</body>
+</html>

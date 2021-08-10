@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inline-block布局</title>
+    <style>
+        .context{
+            width: 800px;
+            height: 200px;
+            font-size: 0;
+            display: flex;
+        }
+        .left{
+            background-color: red;
+            width: 200px;
+            height: 100%;
+            font-size: 14px;
+            display: flex;
+        }
+        @media (max-width: 640px){
+            .left{
+                display: none;
+            }
+        }
+        .right{
+            flex: 1;
+            background-color: blue;
+            width: 500px;
+            height: 100%;
+            font-size: 14px;
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="context">
+        <div class="left">Chinese</div>
+        <div class="right">English</div>
+    </div>
+</body>
+</html>

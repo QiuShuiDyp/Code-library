@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>float实现三栏布局</title>
+    <style>
+        .context{
+            width: 100%;
+            height: 200px;
+        }
+        .left{
+            float: left;
+            width: 200px;
+            height: 100%;
+            background-color: blue;
+        }
+        .right{
+            float: right;
+            width: 200px;
+            height: 100%;
+            background-color: blue;
+        }
+        .middle{
+            margin-left: 200px;
+            margin-right: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="context">
+        <div class="left">left</div>
+        <div class="right">right</div>
+        <div class="middle">context</div>
+    </div>
+</body>
+</html>

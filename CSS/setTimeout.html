@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <span id="time"></span>
+    <button onclick="time()">点击</button>
+  </div>
+</body>
+</html>
+<script>
+  window.count = 0
+  function time(params) {
+    findLeastNumOfUniqueInts([13,22,100,22,5,62,13,24,81,15,99,14,20,2,61,10,40,47,33,7,38,47,92,31,15,40,73,48,24,55,81,63,37,23,59,78,5,50,10,51,67,9,18,78,89,40,71,7,32,67,6,34,69,59,19,39,96,64,81,96,64,5,82,59,29,93,42,72,38,60,82,40,97,91,4,22,85,80,33,51,10,21,54,91,2,94,38,38,19,75,37,7,76,7,27,8,76,11,25,5],78)
+  }
+
+  findLeastNumOfUniqueInts = function(arr, k) {
+      let valArr = []
+      let numArr = []
+      if(arr.length <= k){
+          return 0
+      }
+      arr.filter((item)=>{
+          let flag = false
+          for(let i=0;i<valArr.length;i++){
+              if(valArr[i] === item){
+                  numArr[i]+=numArr[i]
+                  flag = true
+                  break
+              }
+          }
+          if(!flag){
+              valArr.push(item)
+              numArr.push(1)
+          }
+      })
+
+      numArr.sort((a,b)=>{
+          return a-b
+      })
+      
+      if(k === 0){
+          return numArr.length
+      }
+      console.log(numArr)
+      console.log(valArr)
+      for(let i=1;i<numArr.length;i++){
+          if(numArr[0] > k){
+              return numArr.length
+          }else{
+              numArr[i] += numArr[i-1]
+              if(k >numArr[i-1] && k<numArr[i]){
+                  return numArr.length-i
+              }else if(k === numArr[i]){
+                return numArr.length -1-i
+              }
+          }
+          
+      }
+  }
+</script>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <h1>这个是双大括号展示的内容：{{msg}}</h1>
+    <!-- v-model -->
+    <input type="text" v-model="content"/>
+    <!-- v-on -->
+    <button type="reset" v-on:click="handerReset">重置</button><br/>
+    <!-- v-if -->
+    <span v-if="evenNumber === 1">你输入的值是个偶数</span>
+    <span v-else-if="evenNumber === 2">你输入的值是个奇数</span>
+    <span v-else>未输入或输入不合法</span><br>
+    <!-- v-bind -->
+    <span :style="textStyle">这是一段有样式的文字</span><br>
+    <span v-show="evenNumber === 1">show一下</span><br>
+    <!-- v-for -->
+    <ul>
+      <li v-for="item in objArr" :key="item.id">{{item.name}}</li>
+    </ul>
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+  var vm = new Vue({
+    el:'#app',  //将Vue实例和页面已存在的DOM节点做一个挂载绑定
+    data:{
+      msg:'Hello World!',
+      textStyle:{
+        color:'red',
+        fontSize:'30px',
+      },
+      content:'',
+      objArr:[
+        {
+          id:1,
+          name:'Vue'
+        },
+        {
+          id:2,
+          name:'React'
+        },
+        {
+          id:3,
+          name:'Angular'
+        }
+      ]
+    },
+    methods: {
+      handerReset(){
+        this.content = ''
+      }
+    },
+    computed:{
+      evenNumber:function(){
+        let numReg = /^[0-9]*$/
+        let result = this.content !== '' && numReg.exec(this.content)
+        if(result){
+          return parseInt(this.content)%2 === 0 ? 1 : 2
+        }else{
+          return 3
+        }
+      }
+    },
+    watch:{
+      content:function(newVal, oldVal){
+        console.log(newVal, oldVal, 'content值改变了！')
+      }
+    }
+  })
+  </script>
+</body>
+</html>

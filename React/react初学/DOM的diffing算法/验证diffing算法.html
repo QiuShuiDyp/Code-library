@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>diffing算法</title>
+  <style>
+  </style>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="test">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    class Person extends React.Component{
+      state = {
+        persons:[
+          {name:'小张', age:23},
+          {name:'小王', age:26}
+        ]
+      }
+      render(){
+        return (
+          <div>
+            <h2>展示信息</h2>
+              <ul>
+                {
+                  this.state.persons.map((item,index)=>{
+                    return <li key={index}>{item.name}---{item.age}</li>
+                  })
+                }
+              </ul>
+          </div>
+        )
+      }
+    }
+    ReactDOM.render(<Person/>, document.getElementById('test'))
+  </script>
+</body>
+</html>

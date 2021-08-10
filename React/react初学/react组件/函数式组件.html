@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数式定义的组件</title>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="like_button_container">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/babel">
+    //函数式组件，适用简单组件
+    //注意函数名称的首字母大写，注意此处的this是undefined，因为babel编译后开启了严格模式
+    function Demo(){
+      return <h2>函数式定义的组件</h2>
+    }
+    //注意第一个参数，函数式组件需要使用标签的方式，注意需要闭合
+    //render解析组件标签，找到对应的Demo组件
+    //发现组件是使用函数定义的，随后调用该函数，将返回的虚拟DOM转为真实的DOM结构
+    ReactDOM.render(<Demo/>, document.getElementById('like_button_container'))
+  </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin-top:10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 表单 -->
+  <div>
+    <!-- form元素用于收集用户输入，action属性定义提交表单时执行的动作 method定义提交表单时所用的http方法-->
+    <form action="" method="GET">
+      <fieldset>
+      <!-- 为fieldset定义标题 -->
+      <legend>这是一组表单:</legend>
+        输入框：
+        <!-- 文本字段默认宽度是20个字符,设置了name属性，在表单提交时才能正确传递表单的值，便于服务器对数据进行标识 -->
+        <input name="text" type="text" value="这个是初始值"/><br/>
+        密码输入框：
+        <input type="password" value="zhegeshichushizhi"/><br/>
+        密码输入框：
+        <input type="hidden" value="zhegeshichushizhi"/><br/>
+        单选按钮：
+        <!-- label标签，通过for和单选框的id绑定，实现点击文字时也会触发选中-->
+        <label for="S"><input type="radio" name="size" value="" id="S" checked="checked"/>S码</label>
+        <label for="M"><input type="radio" name="size" value="" id="M"/>M码</label>
+        <label for="L"><input type="radio" name="size" value="" id="L"/>L码</label><br/>
+        复选框：
+        <!-- 如果label标签只包裹了一个单选框，则不需要显式绑定for和id，否则需要手动绑定  -->
+        <label><input type="checkbox" name="checkClass" value="English" />英语</label>
+        <label></label><input type="checkbox" name="checkClass" value="Chinese" />语文
+        <label><input type="checkbox" name="checkClass" value="Physics" />物理</label>
+        <label><input type="checkbox" name="checkClass" value="Science" />科学</label><br/>
+        下拉框：
+        <select name="color">
+          <!-- 如果未指定selected，默认会将首个option设为备选项 -->
+          <option value="red">red</option>
+          <option value="blue" selected>blue</option>
+          <option value="yellow">yellow</option>
+        </select><br/>
+        下拉多选框：
+        <select id='checkedLevel' style="width:120px;height:28px;" multiple="multiple">
+    　　　　<option value="1">选项1</option>
+    　　　　<option value="2">选项1</option>
+    　　　　<option value="3">选项1</option>                                                                                                                                                         
+    　　</select><br/>
+        文本域：
+        <textarea rows="10" cols="20"></textarea><br/>
+        <input type="submit" value="提交"/>
+        <input type="reset" value="重置"/>
+        <button type="button" onclick="alert('Hello World!')">ClickMe!</button>
+      </fieldset>
+    </form>
+    <!-- HTML5新增元素 -->
+    <form action="" id="form2">
+      <fieldset>
+        <legend>HTML5新增表单元素</legend>
+        datalist元素不支持IE9以下及Safari浏览器,作用是给input提供预定义选项
+        <input type="text" list="browsers" name="browsers">
+        <datalist id="browsers">
+          <option value="Firefox"></option>
+          <option value="Chrome"></option>
+          <option value="Safari"></option>
+        </datalist><br/>
+        <!-- keygen元素不支持Internet Explorer 和 Safari。-->
+        <!-- 规定用于表单的密钥对生成器字段 -->
+        <!-- <keygen><br/> -->
+        <!-- <output> --><br/>
+      </fieldset>
+    </form>
+    <!-- HTML5新增属性 -->
+    <form action="" autocomplete="on">
+      <fieldset>
+        <legend>HTML5新增表单属性</legend>
+          <input type="text" placeholder="autocomplete='on'，自动完成功能"/><br/>
+          <input type="text" placeholder="autocomplete='off'"  autocomplete="off"/><br/>
+          <input type="text" placeholder="autofocus" autofocus/><br/>
+          <input type="date" max="2021-12-31" placeholder="date max" ><br/>
+          <input type="file" multiple placeholder="文件上传，允许上传多个文件"><br/>
+          <input type="text" pattern="[A-Za-z]{3}" placeholder="正则校验，只允许输入3个字母"><br/>
+          <input type="text" placeholder="placeholder"><br/>
+          <input type="text" required placeholder="required 必填"><br/>
+          <input type="date" step="3" placeholder="step=3,数字间隔"><br/>
+          <input type="submit" value="提交">
+      </fieldset>
+    </form>
+  </div>
+</body>
+</html>

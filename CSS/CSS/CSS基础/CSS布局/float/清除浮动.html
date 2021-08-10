@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>脱离文档流，但是不脱离文本流</title>
+    <style>
+        .item1{
+            float: left;
+            background-color: red;
+        }
+        .item2{
+            float: left;
+            background-color: blue;
+        }
+        .item3{
+            background-color: yellow;
+        }
+        .context::after{
+            content: ' ';
+            height: 0;  
+            clear: both; /*清除浮动*/
+            display: block;  /*伪元素默认是inline的，需要调整为block*/
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="context">
+        <span class="item1">水生呀</span>
+        <span class="item2">水生</span>
+        <!-- 浮动脱离文档流，但是不脱离文本流 -->
+    </div>
+    <span>lalla</span>
+</body>
+</html>

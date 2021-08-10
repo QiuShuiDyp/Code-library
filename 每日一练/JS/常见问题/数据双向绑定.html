@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <input type="text" id="test" onchange="handleChange(event)">
+    <button id='btn'>改变name</button>
+  </div>
+  <script>
+    let obj = {
+      num:0,
+      name:'obj'
+    }
+    let node = document.getElementById('test')
+    // 修改obj属性值时同步修改表单的值
+    let num
+    Object.defineProperty(obj, 'num', {
+      set(val){
+        document.getElementById('test').value = val
+        num = val
+      },
+      get(){
+        return num
+      }
+    })
+
+    function handleChange(event){
+      console.log(event.target.value)
+      console.log(obj.num)
+    }
+
+    let count=0
+    document.getElementById('btn').addEventListener('click',(event)=>{
+      count++
+      obj.num = count
+    })
+
+  </script>
+</body>
+</html>

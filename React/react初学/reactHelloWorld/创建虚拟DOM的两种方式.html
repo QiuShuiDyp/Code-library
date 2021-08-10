@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>js创建虚拟DOM</title>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="like_button_container">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <!-- <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
+
+  <!-- 说明采用babel进行转换,如果是用JS，则type为text/javascript-->
+  <script type="text/javascript">
+    //使用JSX创建虚拟DOM，相对JS方式更加简单
+    const VDOM = (
+      <h1>Hello,React</h1>
+    )
+    //使用JS创建虚拟DOM,参数为：标签名，标签属性，标签内容
+    const JSDOM = React.createElement('h1',{id:'title'},'hello React')
+
+    //使用ReactDOM的render方法，将虚拟DOM和真实的DOM节点做结合
+    ReactDOM.render(JSDOM, document.getElementById('like_button_container'))
+  </script>
+</body>
+</html>

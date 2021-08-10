@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS 类</title>
+</head>
+<body>
+  <!-- 节点容器 -->
+  <div id="like_button_container">
+
+  </div>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <!-- 说明采用babel进行转换-->
+  <script type="text/javascript">
+    class Person {
+      constructor(name, age){
+        //this是声明的实例对象
+        this.name = name
+        this.age = age
+      }
+      speak(){
+        console.log(`我叫${this.name},年龄${this.age}`)
+      }
+    }
+
+    //类的继承
+    class Student extends Person{
+      constructor(name, age, grade){
+        //继承的类构造器必须调用super，super就是调用父类的构造器，且super必须放在语句之前
+        super(name,age)
+        this.grade = grade
+      }
+      //重写父类继承过来的方法
+      speak(){
+        console.log(`我叫${this.name},年龄${this.age},年级${this.grade}`)
+      }
+      study(){
+        console.log('xuexi')
+      }
+    }
+
+    const stu1 = new Student('小张','22','三年级')
+    console.log(stu1)
+  </script>
+</body>
+</html>
